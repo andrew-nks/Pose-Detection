@@ -8,13 +8,14 @@ Guide to each video:
 
 The following videos depict an athlete performing low bar squats with wide stance:
 
-Video1: This video captures the left side of the athlete, thus when prompted for an input "Which side of my body is my video device?", the input should be "L".
+Video 1: This video captures the left side of the athlete, thus when prompted for an input "Which side of my body is my video device?", the input should be "L".
 
-Video2: This video captures the right side of the athlete, thus when prompted for an input "Which side of my body is my video device?", the input should be "R".
+Video 2: This video captures the right side of the athlete, thus when prompted for an input "Which side of my body is my video device?", the input should be "R".
 
-Video3: This video captures the left side of the athlete.
+Video 3: This video captures the left side of the athlete.
 
-VideoA: This video captures the left side of the athlete. In this example, the athlete fails to hit proper depth and thus no reps are counted.
+Video A: This video captures the left side of the athlete. In this example, the athlete fails to hit proper depth and thus no reps are counted.
 
+The following videos depict an athlete performing high bar squats with narrow stance:
 
-Video4: This video captures an athlete doing high bar squats with a narrow stance, captured from the left side.
+Video 4: This video captures the left side of a different athlete.

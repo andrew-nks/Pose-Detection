@@ -4,18 +4,10 @@ A simple program using Mediapipe and OpenCV to count the number of Push Ups done
 
 The Pose Module is using mediapipe's Pose module. Refer to the image below for the different joints in the body that are detected.
 
-Guide to each video:
+When prompted for which side of the athlete is filmed, choose either "L" for left or "R" for right.
 
-The following videos depict an athlete performing low bar squats with wide stance:
+Next, choose from options A, B, C or D depending of the type of squat being done. For powerlifting squats, the optimum hip angle is between 50 to 45 degrees to maximize the weight squatted while staying within IPF depth standard for legitimate rep. To hit minimum depth, the green indicator has to show 0%. If depth is too low, the red indicator will start to indicate above 0%
 
-Video 1: This video captures the left side of the athlete, thus when prompted for an input "Which side of my body is my video device?", the input should be "L".
+For deep squats, these refer to normal training squats that go well below parallel, in this case would be below 50 degrees for hip angle for greater muscle activation.
 
-Video 2: This video captures the right side of the athlete, thus when prompted for an input "Which side of my body is my video device?", the input should be "R".
-
-Video 3: This video captures the left side of the athlete.
-
-Video A: This video captures the left side of the athlete. In this example, the athlete fails to hit proper depth and thus no reps are counted.
-
-The following videos depict an athlete performing high bar squats with narrow stance:
-
-Video 4: This video captures the left side of a different athlete.
+For front squats, the favoured range of motion for muscle activation would below a hip angle of 70 degrees, as the body is more upright during front squats.

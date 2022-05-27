@@ -22,7 +22,7 @@ if squat_type == 'A' or squat_type == 'D':
 
 
 while cap.isOpened():
-    ret, img = cap.read() #640 x 480
+    ret, img = cap.read()       #640 x 480
     #Determine dimensions of video - Help with creation of box in Line 43
     width  = cap.get(3)  # float `width`
     height = cap.get(4)  # float `height`
@@ -37,15 +37,15 @@ while cap.isOpened():
         knee = detector.findAngle(img, knee_angles[0], knee_angles[1], knee_angles[2] )
 
         #Percentage of success of squat
-        
         per = np.interp(hip, (min_depth, 130), (0, 100))
+        
+        # Bar to show squat progress
         bar = np.interp(hip, (min_depth, 130), (380, 50))
 
         if squat_type == 'A' or squat_type == 'D':
             reverse_per = np.interp(hip, (0, max_depth), (0, 100))
             reverse_bar = np.interp(hip, (0, max_depth), (500, 380))
-        # Bar to show squat progress
-            
+                       
         #Check to ensure right form before starting the program
         if hip > 130 and knee > 160:
             form = 1                  

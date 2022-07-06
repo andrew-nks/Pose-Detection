@@ -1,10 +1,12 @@
+import os
 import cv2
 import mediapipe as mp
 import numpy as np
 import PoseModule as pm
 import Squat as sq
 
-cap = cv2.VideoCapture('frontsquat3.mp4')
+file = 'video3.mp4'
+cap = cv2.VideoCapture(file)
 detector = pm.poseDetector()
 count = 0
 direction = 0
@@ -20,14 +22,29 @@ min_depth = sq.sq_type[squat_type][0]
 if squat_type == 'A' or squat_type == 'D':
     max_depth = sq.sq_type[squat_type][1]
 
+# resize factor
+scaling_factorx = 0.85
+scaling_factory = 0.85
+
+# Properties of video to be saved
+height = int(cap.get(3))
+width = int(cap.get(4))
+fps = cap.get(cv2.CAP_PROP_FPS)
+
+# vdieo writer
+video_writer = cv2.VideoWriter(("/Users/Andrew/Desktop/Pose detection/new file.mp4"), cv2.VideoWriter_fourcc('m','p','4','v'), fps, (width*2, height), isColor=False) 
 
 while cap.isOpened():
+# for frame_idx in range(int(cap.get(cv2.CAP_PROP_FRAME_COUNT))):
     ret, img = cap.read()       #640 x 480
     #Determine dimensions of video - Help with creation of box in Line 43
     width  = cap.get(3)  # float `width`
     height = cap.get(4)  # float `height`
     # print(width, height)
     
+    # resize window for display to fit within desktop screen
+    img = cv2.resize(img,None,fx=scaling_factorx,fy=scaling_factory,interpolation=cv2.INTER_AREA)
+
     img = detector.findPose(img, False)
     lmList = detector.findPosition(img, False)
     # print(lmList)
@@ -82,13 +99,15 @@ while cap.isOpened():
             if form == 1:
                 cv2.rectangle(img, (540, 50), (560, 380), (0, 255, 0), 3)
                 cv2.rectangle(img, (540, int(bar)), (560, 380), (0, 255, 0), cv2.FILLED)
-                cv2.putText(img, f'{int(per)}%', (420, 430), cv2.FONT_HERSHEY_PLAIN, 2,
+                cv2.rectangle(img, (450, 400), (535, 450), (0, 0, 0), cv2.FILLED)
+                cv2.putText(img, f'{int(per)}%', (450, 430), cv2.FONT_HERSHEY_PLAIN, 2,
                             (0, 235, 0), 2)
 
                 if squat_type == 'A' or squat_type == 'D':
                     cv2.rectangle(img, (540, 380), (560, 500), (0, 0, 255), 3)
                     cv2.rectangle(img, (540, int(reverse_bar)), (560, 500), (0, 0, 255), cv2.FILLED)
-                    cv2.putText(img, f'{int(100-reverse_per)}%', (600, 430), cv2.FONT_HERSHEY_PLAIN, 2,
+                    cv2.rectangle(img, (450, 450), (535, 500), (0, 0, 0), cv2.FILLED)
+                    cv2.putText(img, f'{int(100-reverse_per)}%', (450, 480), cv2.FONT_HERSHEY_PLAIN, 2,
                                 (0, 0, 255), 2)                                  
 
             #Squat counter
@@ -97,13 +116,19 @@ while cap.isOpened():
                         (255, 0, 0), 5)
             
             #Feedback 
-            cv2.rectangle(img, (500, 0), (640, 40), (255, 255, 255), cv2.FILLED)
-            cv2.putText(img, feedback, (500, 40 ), cv2.FONT_HERSHEY_PLAIN, 2,
+            cv2.rectangle(img, (460, 0), (620, 40), (0, 0, 0), cv2.FILLED)
+            cv2.putText(img, feedback, (460, 40 ), cv2.FONT_HERSHEY_PLAIN, 2,
                         (0, 255, 0), 2)
-            
+
+    
     cv2.imshow('Squat counter', img)
+
+    # write out frame
+    video_writer.write(img)
+
     if cv2.waitKey(10) & 0xFF == ord('q'):
         break
         
 cap.release()
 cv2.destroyAllWindows()
+video_writer.release()
